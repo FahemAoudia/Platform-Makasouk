@@ -5,9 +5,16 @@ import { HomePageSections } from "@/components/home/HomePageSections";
 
 async function load() {
   const cache = { next: { revalidate: 30 } } as const;
-  const categories = await api<Category[]>("/catalog/categories", cache);
-  const models = await api<FashionModel[]>("/catalog/models", cache);
-  return { categories, models };
+  try {
+    const [categories, models] = await Promise.all([
+      api<Category[]>("/catalog/categories", cache),
+      api<FashionModel[]>("/catalog/models", cache),
+    ]);
+    return { categories, models };
+  } catch {
+    /* Build-time (e.g. Railway) أو API غير متاح: لا نفشل prerender */
+    return { categories: [] as Category[], models: [] as FashionModel[] };
+  }
 }
 
 export default async function HomePage() {
