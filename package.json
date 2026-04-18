@@ -19,6 +19,7 @@
     "db:migrate": "prisma migrate dev --schema=./prisma/schema.prisma",
     "db:push": "prisma db push --schema=./prisma/schema.prisma",
     "db:seed": "tsx prisma/seed.ts",
+    "db:railway-fill": "prisma db push --schema=./prisma/schema.prisma && tsx prisma/seed.ts",
     "db:debug-tailors": "tsx prisma/debug-tailors.ts",
     "db:fix-tailor-categories": "tsx prisma/fix-tailor-categories.ts",
     "lint": "npm run lint -w apps/web"
