@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 "use client";
+/* Do not place `export const dynamic` or any code above "use client" — Next.js requires this line first. */
 
 import Image from "next/image";
 import Link from "next/link";
