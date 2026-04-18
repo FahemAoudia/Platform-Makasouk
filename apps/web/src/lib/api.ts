@@ -2,14 +2,14 @@ const DEFAULT_API = "http://localhost:4000/api";
 
 /**
  * Base URL vers l’API.
- * - Côté **serveur** (RSC) : `API_URL` est lu au runtime (Railway) — pas seulement au build.
+ * - Côté **serveur** (RSC) : `SERVER_API_BASE` (évite le nom `API_URL` qui casse Railpack/Railway).
  * - Côté **client** : `NEXT_PUBLIC_API_URL` (injecté au build).
  */
 function getApiBase(): string {
   const trim = (s: string) => s.replace(/\/+$/, "");
   if (typeof window === "undefined") {
     return (
-      (process.env.API_URL ? trim(process.env.API_URL) : undefined) ??
+      (process.env.SERVER_API_BASE ? trim(process.env.SERVER_API_BASE) : undefined) ??
       (process.env.NEXT_PUBLIC_API_URL
         ? trim(process.env.NEXT_PUBLIC_API_URL)
         : undefined) ??
