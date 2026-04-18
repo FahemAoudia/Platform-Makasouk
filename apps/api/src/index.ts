@@ -15,18 +15,14 @@ import reviewsRoutes from "./routes/reviews";
 import recommendationsRoutes from "./routes/recommendations";
 import billingRoutes from "./routes/billing";
 import { attachSocket } from "./socket";
+import { buildCorsOptions } from "./lib/corsConfig";
 
 const app = express();
 const server = http.createServer(app);
 
 const io = attachSocket(server);
 
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN ?? "*",
-    credentials: true,
-  })
-);
+app.use(cors(buildCorsOptions()));
 app.use(express.json({ limit: "2mb" }));
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 

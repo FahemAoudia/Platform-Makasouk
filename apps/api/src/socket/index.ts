@@ -3,14 +3,20 @@ import { Server } from "socket.io";
 import jwt from "jsonwebtoken";
 import type { JwtPayload } from "../lib/jwt";
 import type { Role } from "@prisma/client";
+import { buildCorsOptions } from "../lib/corsConfig";
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "dev-secret-change-me";
 
 export type IoServer = Server;
 
 export function attachSocket(httpServer: HttpServer) {
+  const corsOpts = buildCorsOptions();
   const io = new Server(httpServer, {
-    cors: { origin: process.env.CORS_ORIGIN ?? "*", credentials: true },
+    cors: {
+      origin: corsOpts.origin,
+      credentials: corsOpts.credentials ?? true,
+      methods: corsOpts.methods,
+    },
   });
 
   io.use((socket, next) => {
