@@ -1,11 +1,11 @@
-// ATELIER — Production schema (SQLite Compatible)
+// ATELIER — Prisma schema (PostgreSQL en prod / local avec DATABASE_URL Postgres)
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
