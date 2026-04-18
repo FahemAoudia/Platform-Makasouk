@@ -12,11 +12,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   @apply bg-parchment text-ink antialiased transition-colors duration-300;
   background-color: #f3efe6;
+  overflow-x: clip;
 }
 
 .dark body {

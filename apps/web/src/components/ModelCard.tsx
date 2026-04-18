@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import type { FashionModel } from "@/types";
 import { AdminEditPriceTrigger } from "@/components/admin/AdminModelPriceDialog";
 import { useI18n } from "@/lib/i18n/I18nProvider";
+import { formatPriceWithSymbol } from "@/lib/utils";
 
 export function ModelCard({
   model,
@@ -41,7 +42,7 @@ export function ModelCard({
               alt={model.name}
               fill
               className="object-cover transition duration-700 group-hover:scale-[1.03]"
-              sizes="(max-width:768px) 100vw, 33vw"
+              sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-bark/80 via-bark/10 to-transparent opacity-95" />
             <div className="absolute bottom-0 left-0 right-0 p-6 text-cream">
@@ -55,10 +56,13 @@ export function ModelCard({
             </div>
           </div>
           <div className="relative flex items-center justify-between gap-3 px-6 py-5">
-            <p className="text-xs uppercase tracking-[0.3em] text-bark/50 dark:text-cream/50">
+            <p
+              className="text-xs uppercase tracking-[0.3em] text-bark/50 dark:text-cream/50"
+              dir="ltr"
+            >
               {t("modelCard.from")}{" "}
               <span className="font-medium text-bark dark:text-cream">
-                ${Number(model.basePrice).toLocaleString()}
+                {formatPriceWithSymbol(model.basePrice, t("currency.symbol"))}
               </span>
             </p>
             <div className="flex shrink-0 items-center gap-2">

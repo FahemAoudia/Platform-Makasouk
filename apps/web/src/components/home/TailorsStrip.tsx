@@ -10,8 +10,8 @@ export function TailorsStrip() {
   const artisans = copy.cards;
 
   return (
-    <section className="border-y border-gold/15 bg-gradient-to-b from-forest-deep to-forest py-20 text-cream dark:border-white/10 dark:from-zinc-950 dark:to-[#0f1a16]">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="border-y border-gold/15 bg-gradient-to-b from-forest-deep to-forest py-16 text-cream dark:border-white/10 dark:from-zinc-950 dark:to-[#0f1a16] sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[10px] uppercase tracking-[0.45em] text-gold-bright/90">
             {copy.eyebrow}
@@ -30,7 +30,7 @@ export function TailorsStrip() {
             {copy.arabicLine}
           </p>
         </div>
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-2 md:grid-cols-3">
           {artisans.map((a, i) => (
             <motion.article
               key={`${a.name}-${i}`}

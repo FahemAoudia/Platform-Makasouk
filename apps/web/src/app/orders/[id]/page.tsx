@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth";
 import { createSocket } from "@/lib/socket";
 import { useI18n } from "@/lib/i18n/I18nProvider";
 import { orderStatusLabel } from "@/lib/i18n/messages";
+import { formatPriceWithSymbol } from "@/lib/utils";
 
 type OrderDetail = {
   id: string;
@@ -19,6 +20,7 @@ export default function OrderDetailPage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const { locale, t } = useI18n();
+  const currencySym = t("currency.symbol");
   const { token } = useAuth();
   const [order, setOrder] = useState<OrderDetail | null>(null);
 
@@ -58,11 +60,11 @@ export default function OrderDetailPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <p className="text-[10px] uppercase tracking-[0.45em] text-ink/40 dark:text-cream/55">
         {t("orderDetail.eyebrow")}
       </p>
-      <h1 className="mt-4 font-display text-4xl text-ink dark:text-cream">
+      <h1 className="mt-4 font-display text-3xl text-ink dark:text-cream sm:text-4xl">
         {orderStatusLabel(locale, order.status)}
       </h1>
       <p className="mt-4 text-sm text-ink/55 dark:text-cream/75">
@@ -77,8 +79,11 @@ export default function OrderDetailPage() {
             <li key={i.model.name}>{i.model.name}</li>
           ))}
         </ul>
-        <p className="mt-8 font-display text-3xl text-ink dark:text-cream">
-          ${Number(order.subtotal).toLocaleString()}
+        <p
+          className="mt-8 font-display text-3xl text-ink dark:text-cream"
+          dir="ltr"
+        >
+          {formatPriceWithSymbol(order.subtotal, currencySym)}
         </p>
       </div>
     </div>

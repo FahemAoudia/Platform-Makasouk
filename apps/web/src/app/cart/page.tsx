@@ -119,8 +119,10 @@ export default function CartPage() {
   const images = (m: FashionModel) => (m.images as string[])[0];
 
   return (
-    <div className="grain pattern-mashrabiya mx-auto max-w-5xl px-6 py-16">
-      <h1 className="font-display text-4xl text-bark dark:text-cream">Votre panier</h1>
+    <div className="grain pattern-mashrabiya mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+      <h1 className="font-display text-3xl text-bark dark:text-cream sm:text-4xl">
+        Votre panier
+      </h1>
       <div className="mt-10 space-y-6">
         {cart.items.map((item) => {
           const qty = item.quantity ?? 1;
@@ -213,7 +215,7 @@ export default function CartPage() {
         <button
           type="button"
           onClick={checkout}
-          className="mt-10 rounded-full bg-forest px-10 py-3 text-xs uppercase tracking-[0.35em] text-cream transition hover:bg-forest-muted"
+          className="mt-10 w-full rounded-full bg-forest px-6 py-3.5 text-[11px] uppercase tracking-[0.28em] text-cream transition hover:bg-forest-muted sm:w-auto sm:px-10 sm:text-xs sm:tracking-[0.35em]"
         >
           Passer commande (diffusion aux tailleurs)
         </button>

@@ -19,8 +19,8 @@ export default async function ModelDetailPage({ params }: Props) {
   const images = model.images as string[];
 
   return (
-    <div className="grain pattern-mashrabiya mx-auto max-w-7xl px-6 py-12">
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="grain pattern-mashrabiya mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <div className="space-y-4">
           {images.map((src) => (
             <div
@@ -41,7 +41,7 @@ export default async function ModelDetailPage({ params }: Props) {
           <p className="text-[10px] uppercase tracking-[0.45em] text-bark/45 dark:text-cream/55">
             {model.category.name}
           </p>
-          <h1 className="mt-4 font-display text-5xl text-bark dark:text-cream">
+          <h1 className="mt-4 font-display text-3xl leading-tight text-bark dark:text-cream sm:text-4xl md:text-5xl">
             {model.name}
           </h1>
           {model.subtitle && (
@@ -53,10 +53,10 @@ export default async function ModelDetailPage({ params }: Props) {
             {model.description}
           </p>
           <ModelDetailPrice modelId={model.id} basePrice={Number(model.basePrice)} />
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <Link
               href={`/measure/${model.id}`}
-              className="rounded-full bg-forest px-8 py-3 text-xs uppercase tracking-[0.35em] text-cream transition hover:bg-forest-muted"
+              className="inline-flex justify-center rounded-full bg-forest px-6 py-3 text-center text-[11px] uppercase tracking-[0.28em] text-cream transition hover:bg-forest-muted sm:px-8 sm:text-xs sm:tracking-[0.35em]"
             >
               Mesurer &amp; ajouter au panier
             </Link>

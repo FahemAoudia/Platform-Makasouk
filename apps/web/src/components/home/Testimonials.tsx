@@ -10,13 +10,13 @@ export function Testimonials() {
   const quotes = copy.quotes;
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24">
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="text-center">
         <p className="text-[10px] uppercase tracking-[0.45em] text-bark/45 dark:text-cream/45">
           {copy.eyebrow}
         </p>
         <h2
-          className={`mt-4 font-display text-4xl text-bark dark:text-[#F5E9DA] ${locale === "ar" ? "font-arabic" : ""}`}
+          className={`mt-4 font-display text-[1.85rem] leading-tight text-bark dark:text-[#F5E9DA] sm:text-4xl ${locale === "ar" ? "font-arabic" : ""}`}
           dir={locale === "ar" ? "rtl" : "ltr"}
         >
           {copy.title}
@@ -29,7 +29,7 @@ export function Testimonials() {
           {copy.arabicLine}
         </p>
       </div>
-      <div className="mt-14 grid gap-8 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-2 md:grid-cols-3">
         {quotes.map((q, i) => (
           <motion.blockquote
             key={q.name}

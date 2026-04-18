@@ -19,10 +19,10 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-forest-deep via-forest-deep/88 to-bark/75 dark:from-black/80 dark:via-black/70 dark:to-black/85" />
         <div className="pattern-mashrabiya absolute inset-0 opacity-90 mix-blend-soft-light dark:opacity-60" />
       </div>
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 py-28 md:flex-row md:items-end md:py-36">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 py-20 sm:gap-12 sm:px-6 sm:py-28 md:flex-row md:items-end md:py-36">
         <div className="max-w-2xl">
           <motion.p
-            className="text-[10px] uppercase tracking-[0.55em] text-gold-bright"
+            className="text-[10px] uppercase tracking-[0.45em] text-gold-bright sm:tracking-[0.55em]"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -30,7 +30,7 @@ export function Hero() {
             {t("hero.kicker")}
           </motion.p>
           <motion.h1
-            className={`mt-6 font-display text-5xl leading-[1.08] text-cream md:text-6xl lg:text-[3.5rem] ${locale === "ar" ? "font-arabic" : ""}`}
+            className={`mt-5 font-display text-[2.15rem] leading-[1.12] text-cream sm:mt-6 sm:text-5xl md:text-6xl lg:text-[3.5rem] ${locale === "ar" ? "font-arabic" : ""}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}
@@ -61,20 +61,20 @@ export function Hero() {
             {t("hero.body")}
           </motion.p>
           <motion.div
-            className="mt-10 flex flex-wrap gap-4"
+            className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Link
               href="/browse"
-              className="rounded-full bg-gold px-8 py-3.5 text-xs font-medium uppercase tracking-[0.3em] text-bark shadow-fabric-hover transition hover:bg-gold-bright"
+              className="inline-flex justify-center rounded-full bg-gold px-6 py-3.5 text-center text-[11px] font-medium uppercase tracking-[0.26em] text-bark shadow-fabric-hover transition hover:bg-gold-bright sm:px-8 sm:text-xs sm:tracking-[0.3em]"
             >
               {t("hero.ctaBrowse")}
             </Link>
             <Link
               href="/auth/register"
-              className="rounded-full border border-cream/35 bg-cream/5 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.3em] text-cream backdrop-blur-sm transition hover:border-gold/50 hover:bg-cream/10"
+              className="inline-flex justify-center rounded-full border border-cream/35 bg-cream/5 px-6 py-3.5 text-center text-[11px] font-medium uppercase tracking-[0.26em] text-cream backdrop-blur-sm transition hover:border-gold/50 hover:bg-cream/10 sm:px-8 sm:text-xs sm:tracking-[0.3em]"
             >
               {t("hero.ctaRegister")}
             </Link>

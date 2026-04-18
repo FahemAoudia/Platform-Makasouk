@@ -16,16 +16,16 @@ export function BrowseCategoryView({
 
   return (
     <div
-      className={`mx-auto max-w-7xl px-6 py-16 dark:text-cream ${locale === "ar" ? "font-arabic" : ""}`}
+      className={`mx-auto max-w-7xl px-4 py-12 dark:text-cream sm:px-6 sm:py-16 ${locale === "ar" ? "font-arabic" : ""}`}
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <p className="text-[10px] uppercase tracking-[0.45em] text-ink/40 dark:text-cream/45">
         {t("browseSlug.eyebrow")}
       </p>
-      <h1 className="mt-4 font-display text-5xl capitalize text-ink dark:text-[#F5E9DA]">
+      <h1 className="mt-4 font-display text-3xl capitalize leading-tight text-ink dark:text-[#F5E9DA] sm:text-4xl md:text-5xl">
         {title}
       </h1>
-      <div className="mt-14 grid gap-8 md:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-2 md:grid-cols-3">
         {models.map((m, i) => (
           <ModelCard key={m.id} model={m} index={i} />
         ))}

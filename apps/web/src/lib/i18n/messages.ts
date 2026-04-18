@@ -123,6 +123,10 @@ export const messages = {
       loading: "Chargement…",
       loadError: "Impossible de charger.",
     },
+    currency: {
+      symbol: "DA",
+      priceInputLabel: "Prix (DA)",
+    },
     measure: {
       eyebrow: "Prise de mesures guidée",
       titlePrefix: "Mesures pour",
@@ -279,7 +283,7 @@ export const messages = {
       modelNameHint: "Ex. Décontracté — Signature III",
       modelSignatureLabel: "Signature / sous-titre",
       modelDescriptionLabel: "Description",
-      modelBasePriceLabel: "Prix de base (USD)",
+      modelBasePriceLabel: "Prix de base (DA)",
       modelPhotosLabel: "Photos (appareil ou galerie)",
       modelPhotosHint:
         "Glisser-déposer ou choisir — une ou plusieurs images, comme pour l’édition",
@@ -413,6 +417,10 @@ export const messages = {
     common: {
       loading: "جاري التحميل…",
       loadError: "تعذّر التحميل.",
+    },
+    currency: {
+      symbol: "دج",
+      priceInputLabel: "السعر (دج)",
     },
     measure: {
       eyebrow: "قياس موجّه",
@@ -565,7 +573,7 @@ export const messages = {
       modelNameHint: "مثال: كاجوال — توقيع III",
       modelSignatureLabel: "التوقيع / السطر الفرعي",
       modelDescriptionLabel: "الوصف",
-      modelBasePriceLabel: "السعر الأساسي (USD)",
+      modelBasePriceLabel: "السعر الأساسي (دج)",
       modelPhotosLabel: "الصور (الكاميرا أو المعرض)",
       modelPhotosHint:
         "اسحب وأفلت أو اختر — صورة أو أكثر، كما في تعديل الصور",

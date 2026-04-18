@@ -20,7 +20,7 @@ export function HomePageSections({ categories, models, rec }: Props) {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div
             className={`text-center md:text-left ${locale === "ar" ? "font-arabic" : ""}`}
@@ -29,7 +29,7 @@ export function HomePageSections({ categories, models, rec }: Props) {
             <p className="text-[10px] uppercase tracking-[0.45em] text-bark/45 dark:text-cream/45">
               {t("home.lignesEyebrow")}
             </p>
-            <h2 className="mt-3 font-display text-4xl text-bark dark:text-[#F5E9DA] md:text-[2.75rem]">
+            <h2 className="mt-3 font-display text-[1.85rem] leading-tight text-bark dark:text-[#F5E9DA] sm:text-4xl md:text-[2.75rem]">
               {t("home.lignesTitle")}
             </h2>
             <SectionOrnament />
@@ -49,14 +49,14 @@ export function HomePageSections({ categories, models, rec }: Props) {
 
       <TailorsStrip />
 
-      <section className="border-y border-gold/15 bg-sand/40 py-20 dark:border-white/10 dark:bg-zinc-900/40">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="border-y border-gold/15 bg-sand/40 py-16 dark:border-white/10 dark:bg-zinc-900/40 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className={locale === "ar" ? "font-arabic text-right" : ""} dir={locale === "ar" ? "rtl" : "ltr"}>
               <p className="text-[10px] uppercase tracking-[0.45em] text-bark/45 dark:text-cream/45">
                 {t("home.selectionEyebrow")}
               </p>
-              <h2 className="mt-3 font-display text-4xl text-bark dark:text-[#F5E9DA]">
+              <h2 className="mt-3 font-display text-[1.85rem] leading-tight text-bark dark:text-[#F5E9DA] sm:text-4xl">
                 {t("home.selectionTitle")}
               </h2>
               <SectionOrnament />
@@ -68,7 +68,7 @@ export function HomePageSections({ categories, models, rec }: Props) {
               {t("home.selectionLink")}
             </Link>
           </div>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
             {rec.map((m, i) => (
               <ModelCard key={m.id} model={m} index={i} />
             ))}
@@ -76,7 +76,7 @@ export function HomePageSections({ categories, models, rec }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <div
           className={`flex flex-col gap-4 md:flex-row md:items-end md:justify-between ${locale === "ar" ? "font-arabic text-right" : ""}`}
           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -85,13 +85,13 @@ export function HomePageSections({ categories, models, rec }: Props) {
             <p className="text-[10px] uppercase tracking-[0.45em] text-bark/45 dark:text-cream/45">
               {t("home.lookbookEyebrow")}
             </p>
-            <h2 className="mt-3 font-display text-4xl text-bark dark:text-[#F5E9DA]">
+            <h2 className="mt-3 font-display text-[1.85rem] leading-tight text-bark dark:text-[#F5E9DA] sm:text-4xl">
               {t("home.lookbookTitle")}
             </h2>
             <SectionOrnament />
           </div>
         </div>
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
           {models.slice(0, 6).map((m, i) => (
             <ModelCard key={m.id} model={m} index={i} />
           ))}

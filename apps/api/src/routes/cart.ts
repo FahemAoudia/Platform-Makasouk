@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
+import { paramString } from "../lib/params";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth";
 
 const router = Router();
@@ -75,8 +76,12 @@ router.patch("/items/:itemId", async (req: AuthedRequest, res) => {
   if (!cart) {
     return res.status(404).json({ error: "Cart not found" });
   }
+  const itemId = paramString(req.params.itemId);
+  if (!itemId) {
+    return res.status(400).json({ error: "Invalid item id" });
+  }
   const item = await prisma.cartItem.findFirst({
-    where: { id: req.params.itemId, cartId: cart.id },
+    where: { id: itemId, cartId: cart.id },
   });
   if (!item) {
     return res.status(404).json({ error: "Item not found" });
@@ -97,7 +102,10 @@ router.delete("/items/:id", async (req: AuthedRequest, res) => {
   if (!cart) {
     return res.status(404).json({ error: "Cart not found" });
   }
-  const id = req.params.id;
+  const id = paramString(req.params.id);
+  if (!id) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
   const byLine = await prisma.cartItem.deleteMany({
     where: { id, cartId: cart.id },
   });

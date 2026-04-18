@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { jsonToStringArray, paramString } from "../lib/params";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth";
 
 const router = Router();
@@ -15,8 +16,12 @@ router.get("/", async (req: AuthedRequest, res) => {
 });
 
 router.post("/:modelId", async (req: AuthedRequest, res) => {
+  const modelId = paramString(req.params.modelId);
+  if (!modelId) {
+    return res.status(400).json({ error: "Invalid model id" });
+  }
   const model = await prisma.fashionModel.findUnique({
-    where: { id: req.params.modelId },
+    where: { id: modelId },
   });
   if (!model) return res.status(404).json({ error: "Model not found" });
 
@@ -33,24 +38,28 @@ router.post("/:modelId", async (req: AuthedRequest, res) => {
 });
 
 router.delete("/:modelId", async (req: AuthedRequest, res) => {
+  const modelId = paramString(req.params.modelId);
+  if (!modelId) {
+    return res.status(400).json({ error: "Invalid model id" });
+  }
   await prisma.favorite.deleteMany({
-    where: { userId: req.user!.id, modelId: req.params.modelId },
+    where: { userId: req.user!.id, modelId },
   });
   return res.json({ ok: true });
 });
 
-async function bumpPreferenceFromFavorite(userId: string, model: {
-  categoryId: string;
-  tags: string[];
-}) {
+async function bumpPreferenceFromFavorite(
+  userId: string,
+  model: { categoryId: string; tags: unknown }
+) {
   const pref = await prisma.userPreference.findUnique({ where: { userId } });
   const cat = await prisma.category.findUnique({ where: { id: model.categoryId } });
   const weights = (pref?.categoryWeights as Record<string, number>) ?? {};
   if (cat) {
     weights[cat.slug] = (weights[cat.slug] ?? 0) + 0.15;
   }
-  const tagAffinity = new Set(pref?.tagAffinity ?? []);
-  model.tags.forEach((t) => tagAffinity.add(t));
+  const tagAffinity = new Set<string>(jsonToStringArray(pref?.tagAffinity));
+  jsonToStringArray(model.tags).forEach((t) => tagAffinity.add(t));
   await prisma.userPreference.upsert({
     where: { userId },
     create: {

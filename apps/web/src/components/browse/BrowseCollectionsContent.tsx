@@ -27,7 +27,7 @@ export function BrowseCollectionsContent({
         className="pointer-events-none absolute inset-0 pattern-mashrabiya-indigo dark:opacity-60"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-12 md:pt-16">
+      <div className="relative mx-auto max-w-5xl px-4 pb-16 pt-10 sm:px-6 sm:pb-24 sm:pt-12 md:pt-16">
         <header
           className={`animate-archive-fade ${locale === "ar" ? "font-arabic text-right" : ""}`}
           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -35,7 +35,7 @@ export function BrowseCollectionsContent({
           <p className="text-[11px] uppercase tracking-[0.42em] text-[#4A3F36]/70 dark:text-cream/55">
             {t("browse.eyebrow")}
           </p>
-          <h1 className="mt-5 max-w-3xl font-collections text-4xl font-medium leading-[1.15] text-[#1C2A44] dark:text-[#E8DCC8] md:text-5xl">
+          <h1 className="mt-5 max-w-3xl font-collections text-[1.75rem] font-medium leading-[1.2] text-[#1C2A44] dark:text-[#E8DCC8] sm:text-4xl md:text-5xl">
             {t("browse.title")}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#4A3F36]/90 dark:text-cream/75 md:text-[17px]">
@@ -66,11 +66,11 @@ export function BrowseCollectionsContent({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#5C1A1B]/88 via-[#5C1A1B]/35 to-transparent" />
                 </div>
-                <div className="flex flex-col justify-center border-t border-[#C6A75E]/40 bg-[#FCF8F2]/95 px-8 py-10 md:border-l md:border-t-0 md:px-10 md:py-12 dark:border-[#C6A75E]/25 dark:bg-zinc-900/90">
+                <div className="flex flex-col justify-center border-t border-[#C6A75E]/40 bg-[#FCF8F2]/95 px-5 py-8 sm:px-8 sm:py-10 md:border-l md:border-t-0 md:px-10 md:py-12 dark:border-[#C6A75E]/25 dark:bg-zinc-900/90">
                   <p className="text-[10px] uppercase tracking-[0.4em] text-[#A88B48]">
                     {t("browse.salle")} {index + 1}
                   </p>
-                  <h2 className="mt-4 font-collections text-3xl font-medium leading-tight text-[#5C1A1B] dark:text-[#E8C4C5] md:text-[2rem]">
+                  <h2 className="mt-4 font-collections text-2xl font-medium leading-tight text-[#5C1A1B] dark:text-[#E8C4C5] sm:text-3xl md:text-[2rem]">
                     {c.name}
                   </h2>
                   <p className="mt-5 text-sm leading-[1.75] text-[#4A3F36]/92 dark:text-cream/80 md:text-[15px]">

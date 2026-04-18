@@ -34,11 +34,11 @@ export default function RecommendationsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-16">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
       <p className="text-[10px] uppercase tracking-[0.45em] text-ink/40">
         {t("recommendations.eyebrow")}
       </p>
-      <h1 className="mt-4 font-display text-4xl text-ink">
+      <h1 className="mt-4 font-display text-3xl leading-tight text-ink sm:text-4xl">
         {t("recommendations.title")}
       </h1>
       <p className="mt-4 max-w-2xl text-sm text-ink/55">
@@ -49,7 +49,7 @@ export default function RecommendationsPage() {
           </span>
         )}
       </p>
-      <div className="mt-12 grid gap-8 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {models.map((m, i) => (
           <ModelCard key={m.id} model={m} index={i} />
         ))}

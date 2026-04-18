@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { api } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { useI18n } from "@/lib/i18n/I18nProvider";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -21,6 +22,7 @@ export function AdminModelPriceDialog({
   onOpenChange,
 }: Props) {
   const { token, user } = useAuth();
+  const { t } = useI18n();
   const router = useRouter();
   const [price, setPrice] = useState(String(initialPrice));
   const [saving, setSaving] = useState(false);
@@ -89,7 +91,7 @@ export function AdminModelPriceDialog({
             </h2>
             <form onSubmit={save} className="mt-6 space-y-4">
               <label className="block text-xs uppercase tracking-[0.2em] text-bark/60">
-                Prix (USD)
+                {t("currency.priceInputLabel")}
               </label>
               <input
                 type="number"

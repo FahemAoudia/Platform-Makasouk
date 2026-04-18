@@ -8,6 +8,7 @@ import { createSocket } from "@/lib/socket";
 import type { Order } from "@/types";
 import { useI18n } from "@/lib/i18n/I18nProvider";
 import { orderStatusLabel } from "@/lib/i18n/messages";
+import { formatDateTime, formatPriceWithSymbol } from "@/lib/utils";
 
 export default function OrdersPage() {
   const { t, locale } = useI18n();
@@ -72,8 +73,8 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="font-display text-4xl text-ink dark:text-cream">
+    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+      <h1 className="font-display text-3xl text-ink dark:text-cream sm:text-4xl">
         {t("orders.title")}
       </h1>
       {msg && (
@@ -94,7 +95,7 @@ export default function OrdersPage() {
                   {o.category.name}
                 </p>
                 <p className="mt-2 text-sm text-ink/60 dark:text-cream/70">
-                  {new Date(o.createdAt).toLocaleString()}
+                  {formatDateTime(o.createdAt)}
                 </p>
               </Link>
               <div className="flex shrink-0 flex-col items-stretch gap-3 sm:items-end">
@@ -103,7 +104,7 @@ export default function OrdersPage() {
                     {orderStatusLabel(locale, o.status)}
                   </p>
                   <p className="mt-2 font-display text-2xl text-ink dark:text-cream">
-                    ${Number(o.subtotal).toLocaleString()}
+                    {formatPriceWithSymbol(o.subtotal, t("currency.symbol"))}
                   </p>
                 </div>
                 {o.status === "PENDING" && (

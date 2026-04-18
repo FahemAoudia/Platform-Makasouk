@@ -44,7 +44,9 @@ export default function RootLayout({
         <AuthProvider>
           <Providers>
             <Nav />
-            <main className="flex flex-1 flex-col pt-24">{children}</main>
+            <main className="flex flex-1 flex-col pt-20 sm:pt-[5.25rem] md:pt-24">
+              {children}
+            </main>
             <Footer />
           </Providers>
         </AuthProvider>

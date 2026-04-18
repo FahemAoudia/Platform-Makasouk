@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
+import { paramString } from "../lib/params";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth";
 
 const router = Router();
@@ -71,8 +72,12 @@ router.post("/", async (req: AuthedRequest, res) => {
 });
 
 router.get("/tailor/:tailorId", async (req, res) => {
+  const tailorId = paramString(req.params.tailorId);
+  if (!tailorId) {
+    return res.status(400).json({ error: "Invalid tailor id" });
+  }
   const reviews = await prisma.tailorReview.findMany({
-    where: { tailorId: req.params.tailorId },
+    where: { tailorId },
     include: {
       author: { select: { fullName: true } },
       order: { select: { id: true, createdAt: true } },

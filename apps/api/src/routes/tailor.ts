@@ -11,6 +11,7 @@ import {
 } from "../services/orderLock";
 import type { IoServer } from "../socket";
 import { emitOrderBroadcast, emitOrderTaken, tailorRoom } from "../socket";
+import { paramString } from "../lib/params";
 
 export function createTailorRouter(io: IoServer) {
   const router = Router();
@@ -103,6 +104,10 @@ export function createTailorRouter(io: IoServer) {
   });
 
   router.post("/orders/:id/accept", async (req: AuthedRequest, res) => {
+    const orderId = paramString(req.params.id);
+    if (!orderId) {
+      return res.status(400).json({ error: "Invalid order id" });
+    }
     const profile = await prisma.tailorProfile.findUnique({
       where: { userId: req.user!.id },
     });
@@ -111,7 +116,7 @@ export function createTailorRouter(io: IoServer) {
     }
 
     const result = await acceptOrderForTailor({
-      orderId: req.params.id,
+      orderId,
       tailorProfileId: profile.id,
     });
 
@@ -139,6 +144,10 @@ export function createTailorRouter(io: IoServer) {
 
   /** Cancel / release order back to available pool */
   router.post("/orders/:id/release", async (req: AuthedRequest, res) => {
+    const orderId = paramString(req.params.id);
+    if (!orderId) {
+      return res.status(400).json({ error: "Invalid order id" });
+    }
     const profile = await prisma.tailorProfile.findUnique({
       where: { userId: req.user!.id },
     });
@@ -147,7 +156,7 @@ export function createTailorRouter(io: IoServer) {
     }
 
     const result = await releaseOrderByTailor({
-      orderId: req.params.id,
+      orderId,
       tailorProfileId: profile.id,
     });
 

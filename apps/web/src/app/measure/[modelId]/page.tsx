@@ -82,18 +82,18 @@ export default function MeasurePage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-12">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <p className="text-[10px] uppercase tracking-[0.45em] text-ink/40 dark:text-cream/55">
         {t("measure.eyebrow")}
       </p>
-      <h1 className="mt-4 font-display text-4xl text-ink dark:text-cream">
+      <h1 className="mt-4 font-display text-2xl leading-tight text-ink dark:text-cream sm:text-3xl md:text-4xl">
         {t("measure.titlePrefix")} {model.name}
       </h1>
       <p className="mt-4 max-w-2xl text-sm text-ink/55 dark:text-cream/80">
         {t("measure.intro")}
       </p>
 
-      <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-12 sm:gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-white shadow-card dark:bg-zinc-900 dark:shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
           <AnimatePresence mode="wait">
             {active && (
@@ -121,7 +121,7 @@ export default function MeasurePage() {
                   <p className="text-[10px] uppercase tracking-[0.4em] text-white/70">
                     {formatMeasureStep(locale, step + 1, fields.length)}
                   </p>
-                  <h2 className="mt-2 font-display text-3xl">
+                  <h2 className="mt-2 font-display text-2xl sm:text-3xl">
                     {measurementKeyLabel(locale, active.key)}
                   </h2>
                   {active.guideVideoUrl && (

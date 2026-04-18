@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { jsonToStringArray } from "../lib/params";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth";
 
 const router = Router();
@@ -14,7 +15,7 @@ router.get("/", async (req: AuthedRequest, res) => {
     where: { userId: req.user!.id },
   });
   const weights = (pref?.categoryWeights as Record<string, number>) ?? {};
-  const tags = new Set(pref?.tagAffinity ?? []);
+  const tags = new Set<string>(jsonToStringArray(pref?.tagAffinity));
 
   const models = await prisma.fashionModel.findMany({
     where: { isActive: true },

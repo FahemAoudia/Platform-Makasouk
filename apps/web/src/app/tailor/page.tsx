@@ -5,7 +5,7 @@ import { api } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { createSocket } from "@/lib/socket";
 import { TailorMeasurementsModal } from "@/components/tailor/TailorMeasurementsModal";
-import { cn } from "@/lib/utils";
+import { cn, formatDateTime, formatPriceWithSymbol } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/I18nProvider";
 import { orderStatusLabel } from "@/lib/i18n/messages";
 
@@ -218,10 +218,10 @@ export default function TailorDashboardPage() {
                     )}
                   </p>
                   <p className="mt-2 font-display text-2xl text-bark dark:text-cream">
-                    ${Number(o.subtotal).toLocaleString()}
+                    {formatPriceWithSymbol(o.subtotal, t("currency.symbol"))}
                   </p>
                   <p className="mt-2 text-xs text-bark/50 dark:text-cream/55">
-                    {new Date(o.createdAt).toLocaleString()}
+                    {formatDateTime(o.createdAt)}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
@@ -268,7 +268,7 @@ export default function TailorDashboardPage() {
                       )}
                     </p>
                     <p className="mt-1 font-display text-xl text-bark dark:text-cream">
-                      ${Number(o.subtotal).toLocaleString()}
+                      {formatPriceWithSymbol(o.subtotal, t("currency.symbol"))}
                     </p>
                     <p className="mt-1 font-mono text-xs text-bark/50 dark:text-cream/50">
                       {o.id}

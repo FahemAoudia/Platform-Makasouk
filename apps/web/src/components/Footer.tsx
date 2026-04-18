@@ -13,8 +13,8 @@ export function Footer() {
         className="pointer-events-none absolute inset-0 grain opacity-[0.38]"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <div className="flex flex-col gap-14 border-b border-[#C6A75E]/20 pb-14 md:flex-row md:items-start md:justify-between md:gap-20">
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 md:py-20">
+        <div className="flex flex-col gap-10 border-b border-[#C6A75E]/20 pb-10 sm:gap-14 sm:pb-14 md:flex-row md:items-start md:justify-between md:gap-20">
           <div className="max-w-md space-y-5">
             <p className="inline-block w-fit bg-transparent font-display text-2xl font-medium tracking-[0.22em] text-[#C6A75E] shadow-none">
               MAKASOUK
@@ -23,7 +23,7 @@ export function Footer() {
               {t("footer.tagline")}
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-12 text-sm md:gap-20">
+          <div className="grid grid-cols-1 gap-10 text-sm sm:grid-cols-2 sm:gap-12 md:gap-20">
             <div className="space-y-4">
               <p className="font-display text-[11px] font-medium uppercase tracking-[0.38em] text-[#C6A75E]/90">
                 {t("footer.explorer")}
@@ -41,7 +41,7 @@ export function Footer() {
                 {t("footer.linkRecommendations")}
               </Link>
             </div>
-            <div className="space-y-4 border-l border-[#C6A75E]/20 pl-6">
+            <div className="space-y-4 border-t border-[#C6A75E]/20 pt-6 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
               <p className="font-display text-[11px] font-medium uppercase tracking-[0.38em] text-[#C6A75E]/90">
                 {t("footer.service")}
               </p>

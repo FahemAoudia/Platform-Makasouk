@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { paramString } from "../lib/params";
 
 const router = Router();
 
@@ -11,8 +12,12 @@ router.get("/categories", async (_req, res) => {
 });
 
 router.get("/categories/:slug", async (req, res) => {
+  const slug = paramString(req.params.slug);
+  if (!slug) {
+    return res.status(400).json({ error: "Invalid slug" });
+  }
   const cat = await prisma.category.findUnique({
-    where: { slug: req.params.slug },
+    where: { slug },
   });
   if (!cat) return res.status(404).json({ error: "Not found" });
   return res.json(cat);
@@ -32,8 +37,12 @@ router.get("/models", async (req, res) => {
 });
 
 router.get("/models/:id", async (req, res) => {
+  const id = paramString(req.params.id);
+  if (!id) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
   const model = await prisma.fashionModel.findUnique({
-    where: { id: req.params.id },
+    where: { id },
     include: { category: true },
   });
   if (!model) return res.status(404).json({ error: "Not found" });

@@ -3,13 +3,14 @@ export const dynamic = "force-dynamic";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { api } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import type { Category, FashionModel } from "@/types";
 import { useI18n } from "@/lib/i18n/I18nProvider";
 import { adminRoleLabel, orderStatusLabel } from "@/lib/i18n/messages";
+import { formatDateTime, formatPriceWithSymbol } from "@/lib/utils";
 
 type Analytics = {
   ordersByStatus: { status: string; _count: { id: number } }[];
@@ -43,7 +44,7 @@ type AdminOrderRow = {
   client?: { fullName: string; email: string };
 };
 
-export default function AdminPage() {
+function AdminPageContent() {
   const { t, locale } = useI18n();
   const searchParams = useSearchParams();
   const { token, user } = useAuth();
@@ -429,7 +430,7 @@ export default function AdminPage() {
               {t("admin.revenue")}
             </p>
             <p className="mt-4 font-display text-4xl text-bark dark:text-cream">
-              ${Number(data.revenueTotal ?? 0).toLocaleString()}
+              {formatPriceWithSymbol(Number(data.revenueTotal ?? 0), t("currency.symbol"))}
             </p>
           </div>
           <div className="md:col-span-3 rounded-3xl border border-gold/15 bg-cream/60 p-6 dark:border-white/10 dark:bg-zinc-900/70">
@@ -591,10 +592,10 @@ export default function AdminPage() {
                   ) : null}
                 </p>
                 <p className="mt-2 font-display text-xl text-bark dark:text-cream">
-                  ${Number(o.subtotal).toLocaleString()}
+                  {formatPriceWithSymbol(o.subtotal, t("currency.symbol"))}
                 </p>
                 <p className="mt-1 text-xs text-bark/45 dark:text-cream/60">
-                  {new Date(o.createdAt).toLocaleString()}
+                  {formatDateTime(o.createdAt)}
                 </p>
               </div>
               {o.status === "PENDING" && (
@@ -861,5 +862,19 @@ export default function AdminPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[40vh] items-center justify-center text-sm text-bark/60 dark:text-cream/60">
+          Chargement…
+        </div>
+      }
+    >
+      <AdminPageContent />
+    </Suspense>
   );
 }

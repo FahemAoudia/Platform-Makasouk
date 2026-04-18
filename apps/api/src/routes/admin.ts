@@ -11,6 +11,7 @@ import {
 import { upload } from "../middleware/upload";
 import type { IoServer } from "../socket";
 import { emitOrderDeleted } from "../socket";
+import { paramString } from "../lib/params";
 
 export function createAdminRouter(io: IoServer) {
   const router = Router();
@@ -125,16 +126,20 @@ router.patch("/users/:id/status", async (req: AuthedRequest, res) => {
   if (!parsed.success) {
     return res.status(400).json({ error: parsed.error.flatten() });
   }
-  if (req.params.id === req.user!.id) {
+  const userIdParam = paramString(req.params.id);
+  if (!userIdParam) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+  if (userIdParam === req.user!.id) {
     return res.status(400).json({ error: "Cannot change own account" });
   }
-  const target = await prisma.user.findUnique({ where: { id: req.params.id } });
+  const target = await prisma.user.findUnique({ where: { id: userIdParam } });
   if (!target) return res.status(404).json({ error: "Not found" });
   if (target.role === Role.ADMIN) {
     return res.status(403).json({ error: "Cannot disable admin" });
   }
   const user = await prisma.user.update({
-    where: { id: req.params.id },
+    where: { id: userIdParam },
     data: { disabled: parsed.data.disabled },
   });
   await prisma.adminAuditLog.create({
@@ -150,16 +155,20 @@ router.patch("/users/:id/status", async (req: AuthedRequest, res) => {
 });
 
 router.delete("/users/:id", async (req: AuthedRequest, res) => {
-  if (req.params.id === req.user!.id) {
+  const userIdParam = paramString(req.params.id);
+  if (!userIdParam) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+  if (userIdParam === req.user!.id) {
     return res.status(400).json({ error: "Cannot delete self" });
   }
-  const target = await prisma.user.findUnique({ where: { id: req.params.id } });
+  const target = await prisma.user.findUnique({ where: { id: userIdParam } });
   if (!target) return res.status(404).json({ error: "Not found" });
   if (target.role === Role.ADMIN) {
     return res.status(403).json({ error: "Cannot delete admin" });
   }
   try {
-    await prisma.user.delete({ where: { id: req.params.id } });
+    await prisma.user.delete({ where: { id: userIdParam } });
   } catch {
     return res.status(409).json({
       error: "Delete blocked (existing relations). Use disable instead.",
@@ -170,7 +179,7 @@ router.delete("/users/:id", async (req: AuthedRequest, res) => {
       actorId: req.user!.id,
       action: "user.delete",
       entityType: "User",
-      entityId: req.params.id,
+      entityId: userIdParam,
     },
   });
   return res.status(204).send();
@@ -294,8 +303,12 @@ router.patch("/tailors/:tailorProfileId/categories", async (req: AuthedRequest, 
   if (!parsed.success) {
     return res.status(400).json({ error: parsed.error.flatten() });
   }
+  const tailorProfileId = paramString(req.params.tailorProfileId);
+  if (!tailorProfileId) {
+    return res.status(400).json({ error: "Invalid tailor profile id" });
+  }
   const profile = await prisma.tailorProfile.findUnique({
-    where: { id: req.params.tailorProfileId },
+    where: { id: tailorProfileId },
   });
   if (!profile) return res.status(404).json({ error: "Not found" });
 
