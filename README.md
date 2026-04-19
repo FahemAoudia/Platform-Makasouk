@@ -1,6 +1,6 @@
 # Makasouk — Atelier (sur-mesure)
 
-Plateforme **mobile-first** de couture sur-mesure : parcourir les lignes, **mesures guidées**, panier, commandes diffusées aux tailleurs par catégorie, suivi en temps réel (WebSockets).
+Plateforme de couture sur-mesure : parcourir les lignes, **mesures guidées**, panier, commandes diffusées aux tailleurs par catégorie, suivi en temps réel (WebSockets).
 
 **Auteur :** Aoudia Fahem  
 **Licence :** voir [`LICENSE`](./LICENSE) (MIT).
